@@ -27,15 +27,24 @@ public class LabelController {
         return labelRepository.create(label);
     }
 
-    public Label updateLabel(int id, String newName) {
-        return null;
+    public Label updateLabel(int id, String newName, int newPostId) throws SQLException {
+        Label label = new Label();
+        label.setId(id);
+        label.setName(newName);
+        label.setPost_id(newPostId);
+        labelRepository.update(label);
+        return label;
     }
 
     public List<Label> getAllLabel() throws SQLException {
         return labelRepository.getAll();
     }
 
-    public void deleteLabelById(int id) {
+    public Label getLabelById(int id) throws SQLException {
+        return labelRepository.getById(id);
+    }
+
+    public void deleteLabelById(int id) throws SQLException {
         labelRepository.deleteById(id);
     }
 }

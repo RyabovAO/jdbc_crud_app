@@ -11,6 +11,7 @@ import java.util.List;
 public class Writer {
     private int id;
     private String fistName;
-    private String LastName;
-    private List<Post> post;
+    private String lastName;
+    private List<Post> posts;
+    private Status status;
 }

@@ -23,12 +23,17 @@ public class MySqlConnection {
         dbUrl = properties.getProperty("url");
         dbUser = properties.getProperty("userName");
         dbPassword = properties.getProperty("password");
-        driverUrl = properties.getProperty("driver");
+//        driverUrl = properties.getProperty("driver");
+
+//        try {
+//            Class.forName(driverUrl);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
 
         try {
-            Class.forName(driverUrl);
             connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException  e) {
             throw new RuntimeException(e);
         }
         return connection;

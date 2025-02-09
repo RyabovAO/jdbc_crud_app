@@ -9,9 +9,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-    private Long id;
+    private int id;
     private String content;
     private String created;
     private String updated;
     private List<Label> labels;
+    private int writerId;
+    private PostStatus postStatus;
 }

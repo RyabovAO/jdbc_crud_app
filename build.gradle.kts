@@ -15,11 +15,15 @@ repositories {
 
 dependencies {
     implementation("org.projectlombok:lombok:1.18.36")
+    implementation("com.mysql:mysql-connector-j:9.2.0")
+    implementation("com.google.protobuf:protobuf-java:4.28.3")
+    implementation("org.liquibase:liquibase-core:4.30.0")
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
-    implementation("mysql:mysql-connector-java:8.0.33")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.mockito:mockito-core:5.12.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.12.0")
 }
 
 tasks.test {
