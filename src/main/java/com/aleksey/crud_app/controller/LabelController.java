@@ -18,7 +18,7 @@ public class LabelController {
     }
 
         public Label createLabel(String name, int postId) throws SQLException {
-        if(name == null) {
+        if(name == null || postId == 0) {
             return null;
         }
         Label label = new Label();
@@ -28,6 +28,9 @@ public class LabelController {
     }
 
     public Label updateLabel(int id, String newName, int newPostId) throws SQLException {
+        if(id == 0 || newName == null || newPostId == 0) {
+            return null;
+        }
         Label label = new Label();
         label.setId(id);
         label.setName(newName);
@@ -41,10 +44,17 @@ public class LabelController {
     }
 
     public Label getLabelById(int id) throws SQLException {
+        if(id == 0) {
+            System.out.println("Uncorrected id");
+            return null;
+        }
         return labelRepository.getById(id);
     }
 
     public void deleteLabelById(int id) throws SQLException {
-        labelRepository.deleteById(id);
+        if(id == 0) {
+            System.out.println("Uncorrected id");
+        } else labelRepository.deleteById(id);
+
     }
 }
