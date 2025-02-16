@@ -2,6 +2,7 @@ package com.aleksey.crud_app.model;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data

@@ -14,18 +14,18 @@ public class PostView {
         this.postController = new PostController();
     }
 
-    public void getAllPost() throws SQLException {
+    public void getAllPost() {
         postController.getAllPost().forEach(p -> System.out.println(p.toString()));
     }
 
-    public void getPost() throws SQLException {
+    public void getPost() {
         System.out.println("Enter post id");
         int id = scanner.nextInt();
         Post post = postController.getPostById(id);
         System.out.println("Post with ID: " + post.toString());
     }
 
-    public void createPost() throws SQLException {
+    public void createPost() {
         System.out.println("Enter content");
         String content = scanner.nextLine();
         System.out.println("Enter created");
@@ -40,7 +40,7 @@ public class PostView {
         System.out.println("Created post: " + createdPost);
     }
 
-    public void updatePost() throws SQLException {
+    public void updatePost() {
         System.out.println("Enter post id");
         int id = scanner.nextInt();
         System.out.println("Enter new content");
@@ -57,7 +57,7 @@ public class PostView {
         System.out.println("Post with id update to: " + updatePost);
     }
 
-    public void deletePost() throws SQLException {
+    public void deletePost() {
         System.out.println("Enter post id");
         int id = scanner.nextInt();
         postController.deletePostById(id);

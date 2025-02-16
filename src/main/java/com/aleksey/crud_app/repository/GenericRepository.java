@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface GenericRepository<T, ID> {
 
-    T getById(ID id) throws SQLException;
-    List<T> getAll() throws SQLException;
-    T create(T t) throws SQLException;
-    T update(T t) throws SQLException;
-    void deleteById(ID id) throws SQLException;
+    T getById(ID id);
+    List<T> getAll();
+    T create(T t);
+    T update(T t);
+    void deleteById(ID id);
 }

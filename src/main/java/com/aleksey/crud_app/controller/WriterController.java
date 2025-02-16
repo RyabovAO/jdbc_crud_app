@@ -16,29 +16,29 @@ public class WriterController {
         this.writerRepository = new WriterRepositoryImpl();
     }
 
-    public Writer createWriter (String fistName, String lastName) throws SQLException {
+    public Writer createWriter (String fistName, String lastName) {
         Writer writer = new Writer();
         writer.setFistName(fistName);
         writer.setLastName(lastName);
         return writerRepository.create(writer);
     }
 
-    public Writer updateWriter(int id, String fistName, String lastName) throws SQLException {
+    public Writer updateWriter(int id, String fistName, String lastName) {
         Writer writer = getWriterById(id);
         writer.setFistName(fistName);
         writer.setLastName(lastName);
         return writerRepository.update(writer);
     }
 
-    public Writer getWriterById(int id) throws SQLException {
+    public Writer getWriterById(int id) {
         return writerRepository.getById(id);
     }
 
-    public List<Writer> getAllWriters() throws SQLException {
+    public List<Writer> getAllWriters() {
         return writerRepository.getAll();
     }
 
-    public void deleteWriterById(int id) throws SQLException {
+    public void deleteWriterById(int id) {
         writerRepository.deleteById(id);
     }
 }

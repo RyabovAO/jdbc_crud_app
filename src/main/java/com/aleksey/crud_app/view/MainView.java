@@ -41,39 +41,21 @@ public class MainView {
         int num = Integer.parseInt(scanner.nextLine());
         switch (num) {
             case 1:
-                try {
-                    labelView.createLabel();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                labelView.createLabel();
                 break;
             case 2:
-                try {
-                    labelView.updateLabel();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                labelView.updateLabel();
                 break;
             case 3:
-                try {
-                    labelView.getLabel();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
+                labelView.getLabel();
                 break;
             case 4:
-                try {
-                    labelView.getAllLabel();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                labelView.getAllLabel();
                 break;
             case 5:
-                try {
-                    labelView.deleteLabel();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+
+                labelView.deleteLabel();
                 break;
             default:
                 System.out.println("Не верное значение");
@@ -90,39 +72,19 @@ public class MainView {
         int num = Integer.parseInt(scanner.nextLine());
         switch (num) {
             case 1:
-                try {
-                    postView.createPost();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                postView.createPost();
                 break;
             case 2:
-                try {
-                    postView.updatePost();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                postView.updatePost();
                 break;
             case 3:
-                try {
-                    postView.getPost();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                postView.getPost();
                 break;
             case 4:
-                try {
-                    postView.getAllPost();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                postView.getAllPost();
                 break;
             case 5:
-                try {
-                    postView.deletePost();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                postView.deletePost();
                 break;
             default:
                 System.out.println("Не верное значение");
@@ -140,39 +102,19 @@ public class MainView {
         int num = Integer.parseInt(scanner.nextLine());
         switch (num) {
             case 1:
-                try {
-                    writerView.createWriter();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                writerView.createWriter();
                 break;
             case 2:
-                try {
-                    writerView.updateWriter();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                writerView.updateWriter();
                 break;
             case 3:
-                try {
-                    writerView.getWriter();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                writerView.getWriter();
                 break;
             case 4:
-                try {
-                    writerView.getAllWriter();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                writerView.getAllWriter();
                 break;
             case 5:
-                try {
-                    writerView.deleteWriter();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                writerView.deleteWriter();
                 break;
             default:
                 System.out.println("Не верное значение");

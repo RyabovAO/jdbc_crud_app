@@ -14,18 +14,18 @@ public class WriterView {
         this.writerController = new WriterController();
     }
 
-    public void getAllWriter() throws SQLException {
+    public void getAllWriter() {
         writerController.getAllWriters().forEach(w -> System.out.println(w.toString()));
     }
 
-    public void getWriter() throws SQLException {
+    public void getWriter() {
         System.out.println("Enter writer id");
         int id = scanner.nextInt();
         Writer writer = writerController.getWriterById(id);
         System.out.println("writer with ID: " + writer.toString());
     }
 
-    public void createWriter() throws SQLException {
+    public void createWriter() {
         System.out.println("Enter fist name");
         String fistName = scanner.nextLine();
         System.out.println("Enter last name");
@@ -36,7 +36,7 @@ public class WriterView {
         System.out.println("Created writer: " + createdWriter);
     }
 
-    public void updateWriter() throws SQLException {
+    public void updateWriter() {
         System.out.println("Enter writer id");
         int id = scanner.nextInt();
         System.out.println("Enter new fist name");
@@ -49,7 +49,7 @@ public class WriterView {
         System.out.println("writer with id update to: " + updateWriter);
     }
 
-    public void deleteWriter() throws SQLException {
+    public void deleteWriter() {
         System.out.println("Enter writer id");
         int id = scanner.nextInt();
         writerController.deleteWriterById(id);

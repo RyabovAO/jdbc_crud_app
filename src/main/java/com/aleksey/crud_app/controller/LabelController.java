@@ -17,7 +17,7 @@ public class LabelController {
         this.labelRepository = new LabelRepositoryImpl();
     }
 
-        public Label createLabel(String name, int postId) throws SQLException {
+        public Label createLabel(String name, int postId) {
         if(name == null || postId == 0) {
             return null;
         }
@@ -27,7 +27,7 @@ public class LabelController {
         return labelRepository.create(label);
     }
 
-    public Label updateLabel(int id, String newName, int newPostId) throws SQLException {
+    public Label updateLabel(int id, String newName, int newPostId) {
         if(id == 0 || newName == null || newPostId == 0) {
             return null;
         }
@@ -39,11 +39,11 @@ public class LabelController {
         return label;
     }
 
-    public List<Label> getAllLabel() throws SQLException {
+    public List<Label> getAllLabel() {
         return labelRepository.getAll();
     }
 
-    public Label getLabelById(int id) throws SQLException {
+    public Label getLabelById(int id) {
         if(id == 0) {
             System.out.println("Uncorrected id");
             return null;
@@ -51,7 +51,7 @@ public class LabelController {
         return labelRepository.getById(id);
     }
 
-    public void deleteLabelById(int id) throws SQLException {
+    public void deleteLabelById(int id) {
         if(id == 0) {
             System.out.println("Uncorrected id");
         } else labelRepository.deleteById(id);

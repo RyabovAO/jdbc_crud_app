@@ -16,7 +16,7 @@ public class LabelView {
         this.labelController = new LabelController();
     }
 
-    public void createLabel() throws SQLException {
+    public void createLabel() {
         System.out.println("Enter name");
         String name = scanner.nextLine();
         System.out.println("Enter post id");
@@ -27,7 +27,7 @@ public class LabelView {
         System.out.println("Created label: " + createdLabel);
     }
 
-    public void updateLabel() throws SQLException {
+    public void updateLabel() {
         System.out.println("Enter label id");
         int id = Integer.parseInt(scanner.nextLine());
 
@@ -42,18 +42,18 @@ public class LabelView {
         System.out.println("label with id update to: " + updateLabel);
     }
 
-    public void getLabel() throws SQLException {
+    public void getLabel() {
         System.out.println("Enter label id");
         int id = scanner.nextInt();
         Label receivedLabel = labelController.getLabelById(id);
         System.out.println("Label with ID: " + receivedLabel.toString());
     }
 
-    public void getAllLabel() throws SQLException {
+    public void getAllLabel() {
         labelController.getAllLabel().forEach(l -> System.out.println(l.toString()));
     }
 
-    public void deleteLabel() throws SQLException {
+    public void deleteLabel() {
         System.out.println("Enter label id");
         int id = scanner.nextInt();
         labelController.deleteLabelById(id);

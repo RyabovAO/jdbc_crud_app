@@ -30,7 +30,7 @@ public class LabelRepositoryImpl implements LabelRepository {
     }
 
         @Override
-    public Label getById(Integer labelId) throws SQLException {
+    public Label getById(Integer labelId) {
         Label selectLabel = new Label();
             try (Connection connection = MySqlConnection.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID)
@@ -43,13 +43,15 @@ public class LabelRepositoryImpl implements LabelRepository {
                     selectLabel.setPost_id(resultSet.getInt("post_id"));
                     selectLabel.setStatus(Status.valueOf(resultSet.getString("status")));
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        return selectLabel;
+            return selectLabel;
 
     }
 
     @Override
-    public List<Label> getAll() throws SQLException {
+    public List<Label> getAll() {
         List<Label> labels = new ArrayList<>();
         try (Connection connection = MySqlConnection.getConnection();
              Statement statement = connection.createStatement()
@@ -63,12 +65,14 @@ public class LabelRepositoryImpl implements LabelRepository {
                 Label lb = new Label(id, name, post_id, Status.valueOf(status));
                 labels.add(lb);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return labels;
     }
 
     @Override
-    public Label create(Label label) throws SQLException {
+    public Label create(Label label) {
 
         int id = getIdCount() + 1;
         label.setId(id);
@@ -81,12 +85,14 @@ public class LabelRepositoryImpl implements LabelRepository {
             preparedStatement.setInt(3, label.getPost_id());
             preparedStatement.setString(4, label.getStatus().toString());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return label;
     }
 
     @Override
-    public Label update(Label label) throws SQLException {
+    public Label update(Label label) {
         try (Connection connection = MySqlConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {
@@ -94,17 +100,21 @@ public class LabelRepositoryImpl implements LabelRepository {
             preparedStatement.setInt(2, label.getPost_id());
             preparedStatement.setInt(3, label.getId());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return label;
     }
 
     @Override
-    public void deleteById(Integer integer) throws SQLException {
+    public void deleteById(Integer integer) {
         try (Connection connection = MySqlConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE)
         ) {
             preparedStatement.setInt(1, integer);
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

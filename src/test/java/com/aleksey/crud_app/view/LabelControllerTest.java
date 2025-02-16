@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,44 +28,30 @@ class LabelControllerTest {
 
     @Test
     void createLabelTestCorrectedData() {
-        Label label = new Label();
-        label.setName("testName");
-        label.setPost_id(2);
-        try {
-            Mockito.when(labelRepository.create(label)).thenReturn(label);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Label actulaLabel = new Label();
+        actulaLabel.setName("testName");
+        actulaLabel.setPost_id(2);
 
-        Label labelForTest;
-        try {
-            labelForTest = labelController.createLabel("testName", 2);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Mockito.when(labelRepository.create(actulaLabel)).thenReturn(actulaLabel);
 
-        Assertions.assertEquals(label, labelForTest);
+        Label expectedLabel;
+        expectedLabel = labelController.createLabel("testName", 2);
+
+        Assertions.assertEquals(actulaLabel, expectedLabel);
     }
 
     @Test
     void createLabelTestNameIsNull() {
-        Label label = new Label();
-        label.setName(null);
-        label.setPost_id(2);
-        try {
-            Mockito.when(labelRepository.create(label)).thenReturn(null);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Label actualLabel = new Label();
+        actualLabel.setName(null);
+        actualLabel.setPost_id(2);
 
-        Label labelForTest;
-        try {
-            labelForTest = labelController.createLabel(null, 2);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Mockito.when(labelRepository.create(actualLabel)).thenReturn(null);
 
-        Assertions.assertNull(labelForTest);
+        Label expectedLabel;
+        expectedLabel = labelController.createLabel(null, 2);
+
+        Assertions.assertNull(expectedLabel);
     }
 
     @Test
@@ -74,18 +59,12 @@ class LabelControllerTest {
         Label label = new Label();
         label.setName("testName");
         label.setPost_id(0);
-        try {
-            Mockito.when(labelRepository.create(label)).thenReturn(null);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        Mockito.when(labelRepository.create(label)).thenReturn(null);
 
         Label labelForTest;
-        try {
-            labelForTest = labelController.createLabel("testName", 0);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        labelForTest = labelController.createLabel("testName", 0);
 
         Assertions.assertNull(labelForTest);
     }
@@ -96,18 +75,12 @@ class LabelControllerTest {
         label.setId(2);
         label.setName("newName");
         label.setPost_id(2);
-        try {
-            Mockito.when(labelRepository.update(label)).thenReturn(label);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        Mockito.when(labelRepository.update(label)).thenReturn(label);
 
         Label labelForTest;
-        try {
-            labelForTest = labelController.updateLabel(2, "newName", 2);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        labelForTest = labelController.updateLabel(2, "newName", 2);
 
         Assertions.assertEquals(label, labelForTest);
     }
@@ -115,17 +88,12 @@ class LabelControllerTest {
     @Test
     void getLabelTestCorrectedId() {
         Label label = new Label(1, "raskaz", 1, Status.ACTIVE);
-        try {
-            Mockito.when(labelRepository.getById(1)).thenReturn(label);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        Mockito.when(labelRepository.getById(1)).thenReturn(label);
+
         Label testLabel;
-        try {
-            testLabel = labelController.getLabelById(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        testLabel = labelController.getLabelById(1);
 
         Assertions.assertEquals(label, testLabel);
     }
@@ -133,39 +101,27 @@ class LabelControllerTest {
     @Test
     void getLabelTestWhenIdIsZero() {
 
-        try {
-            Mockito.when(labelRepository.getById(0)).thenReturn(null);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Mockito.when(labelRepository.getById(0)).thenReturn(null);
 
         Label testLabel;
-        try {
-            testLabel = labelController.getLabelById(0);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        testLabel = labelController.getLabelById(0);
 
         Assertions.assertNull(testLabel);
     }
 
     @Test
     void getAllLabelTest() {
+
         Label label = new Label(1, "raskaz", 1, Status.ACTIVE);
         Label label2 = new Label(2, "raskaz2", 1, Status.ACTIVE);
         List<Label> expectedList = new ArrayList<>(Arrays.asList(label, label2));
-        try {
-            Mockito.when(labelRepository.getAll()).thenReturn(expectedList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        Mockito.when(labelRepository.getAll()).thenReturn(expectedList);
 
         List<Label> actualList;
-        try {
-            actualList = labelController.getAllLabel();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        actualList = labelController.getAllLabel();
 
         Assertions.assertEquals(expectedList, actualList);
     }
@@ -173,22 +129,10 @@ class LabelControllerTest {
     @Test
     void deleteLabelTestCorrectedId() {
 
-        try {
-            Mockito.doNothing().when(labelRepository).deleteById(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Mockito.doNothing().when(labelRepository).deleteById(1);
 
-        try {
-            labelController.deleteLabelById(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        labelController.deleteLabelById(1);
 
-        try {
-            Mockito.verify(labelRepository).deleteById(1);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Mockito.verify(labelRepository).deleteById(1);
     }
 }

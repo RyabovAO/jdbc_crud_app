@@ -16,7 +16,7 @@ public class PostController {
         this.postRepository = new PostRepositoryImpl();
     }
 
-    public Post createPost(String content, String created, String updated, int writerId) throws SQLException {
+    public Post createPost(String content, String created, String updated, int writerId) {
         Post post = new Post();
         post.setContent(content);
         post.setCreated(created);
@@ -25,7 +25,7 @@ public class PostController {
         return postRepository.create(post);
     }
 
-    public Post updatePost(int id, String content, String created, String updated, int writeId) throws SQLException {
+    public Post updatePost(int id, String content, String created, String updated, int writeId) {
         Post post = getPostById(id);
         post.setContent(content);
         post.setCreated(created);
@@ -34,15 +34,15 @@ public class PostController {
         return postRepository.update(post);
     }
 
-    public Post getPostById(int id) throws SQLException {
+    public Post getPostById(int id) {
         return postRepository.getById(id);
     }
 
-    public List<Post> getAllPost() throws SQLException {
+    public List<Post> getAllPost() {
         return postRepository.getAll();
     }
 
-    public void deletePostById(int id) throws SQLException {
+    public void deletePostById(int id) {
         postRepository.deleteById(id);
     }
 }
