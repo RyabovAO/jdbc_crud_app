@@ -14,15 +14,19 @@ public class PostRepositoryImpl implements PostRepository {
     private final String UPDATE = "UPDATE post SET content = ?, created = ?, updated = ?, writer_Id = ? WHERE id = ?";
     private final String SELECT_ALL = """
             SELECT * FROM post
-            LEFT JOIN label
-            ON post.id = label.post_id
+                JOIN post_label
+                ON post.id = post_label.post_id
+                JOIN label
+                ON post_label.label_id = label.id
             """;
     private final String SELECT_BY_ID = """
-        SELECT * FROM post
-        JOIN label
-        ON post.id = label.post_id
-        WHERE post.id = ? AND label.status = 'ACTIVE'
-        """;
+                SELECT * FROM post
+                JOIN post_label
+                ON post.id = post_label.post_id
+                JOIN label
+                ON post_label.label_id = label.id
+                WHERE post.id = ?;
+            """;
     private final String DELETE = "UPDATE post SET post_status = 'DELETED' WHERE id = ?";
     private final String COUNT = "SELECT COUNT(id) FROM post";
 
@@ -31,7 +35,7 @@ public class PostRepositoryImpl implements PostRepository {
              Statement statement = connection.createStatement()
         ) {
             ResultSet resultSet = statement.executeQuery(COUNT);
-            if(resultSet.next()) return resultSet.getInt(1);
+            if (resultSet.next()) return resultSet.getInt(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,6 +52,7 @@ public class PostRepositoryImpl implements PostRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             selectPost = PostMapping.postMapping(resultSet).getFirst();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

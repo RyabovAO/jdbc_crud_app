@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+        <changeSet id="create_table_post_label" author="aryabov">
+            <createTable tableName="post_label">
+                <column name="post_id" type="int UNSIGNED">
+                    <constraints primaryKey="true" nullable="true" />
+                </column>
+                <column name="label_id" type="int UNSIGNED">
+                    <constraints primaryKey="true" nullable="true" />
+                </column>
+            </createTable>
+
+            <addForeignKeyConstraint  baseColumnNames="id"
+                                      baseTableName="post"
+                                      constraintName="fk_post_id"
+                                      referencedColumnNames="post_id"
+                                      referencedTableName="post_label"/>
+
+            <addForeignKeyConstraint  baseColumnNames="id"
+                                      baseTableName="label"
+                                      constraintName="fk_label_id"
+                                      referencedColumnNames="label_id"
+                                      referencedTableName="post_label"/>
+        </changeSet>
+</databaseChangeLog>

@@ -23,7 +23,6 @@ public class LabelController {
         }
         Label label = new Label();
         label.setName(name);
-        label.setPost_id(postId);
         return labelRepository.create(label);
     }
 
@@ -34,7 +33,6 @@ public class LabelController {
         Label label = new Label();
         label.setId(id);
         label.setName(newName);
-        label.setPost_id(newPostId);
         labelRepository.update(label);
         return label;
     }

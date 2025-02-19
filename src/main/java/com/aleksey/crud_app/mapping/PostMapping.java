@@ -17,41 +17,46 @@ public class PostMapping {
         Post selectPost = null;
         int currentPostId = -1;
 
-        try {
-            while (resultSet.next()) {
+            try {
+                if (resultSet.next()) {
+                    while (resultSet.next()) {
 
-                int postId = resultSet.getInt("post.id");
-                if (currentPostId != postId) {
-                    selectPost = new Post();
-                    selectPost.setId(postId);
-                    selectPost.setContent(resultSet.getString("post.content"));
-                    selectPost.setCreated(resultSet.getString("post.created"));
-                    selectPost.setUpdated(resultSet.getString("post.updated"));
-                    selectPost.setWriterId(resultSet.getInt("post.writer_id"));
-                    selectPost.setPostStatus(PostStatus.valueOf(resultSet.getString("post.post_status")));
+                        int postId = resultSet.getInt("post.id");
+                        if (currentPostId != postId) {
+                            selectPost = new Post();
+                            selectPost.setId(postId);
+                            selectPost.setContent(resultSet.getString("post.content"));
+                            selectPost.setCreated(resultSet.getString("post.created"));
+                            selectPost.setUpdated(resultSet.getString("post.updated"));
+                            selectPost.setWriterId(resultSet.getInt("post.writer_id"));
+                            selectPost.setPostStatus(PostStatus.valueOf(resultSet.getString("post.post_status")));
 
-                    postList.add(selectPost);
+                            postList.add(selectPost);
 
-                    currentPostId = postId;
+                            currentPostId = postId;
+                        }
+
+                        Label lb = new Label();
+                        int currentLabelId = resultSet.getInt("label.id");
+                        lb.setId(currentLabelId);
+                        lb.setName(resultSet.getString("label.name"));
+                        if (currentLabelId == 0) {
+                            lb.setStatus(null);
+                        } else lb.setStatus(Status.valueOf(resultSet.getString("status")));
+
+                        if (selectPost.getLabels() == null) {
+                            selectPost.setLabels(new ArrayList<>());
+                            selectPost.getLabels().add(lb);
+                        } else selectPost.getLabels().add(lb);
+                    }
+
+                } else {
+                    System.out.println("Id is incorrect");
+                    throw new NullPointerException();
                 }
-
-                Label lb = new Label();
-                int currentLabelId = resultSet.getInt("label.id");
-                lb.setId(currentLabelId);
-                lb.setName(resultSet.getString("label.name"));
-                lb.setPost_id(resultSet.getInt("label.post_id"));
-                if(currentLabelId == 0 ) {
-                    lb.setStatus(null);
-                } else lb.setStatus(Status.valueOf(resultSet.getString("status")));
-
-                if(selectPost.getLabels() == null) {
-                    selectPost.setLabels(new ArrayList<>());
-                    selectPost.getLabels().add(lb);
-                } else selectPost.getLabels().add(lb);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         return postList;
     }
 }

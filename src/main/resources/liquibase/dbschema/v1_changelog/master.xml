@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/writer_changelog" relativeToChangelogFile="true"/>
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/data/insert_changeset_writer.xml" relativeToChangelogFile="true"/>
+
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/post_changelog" relativeToChangelogFile="true"/>
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/data/insert_changeset_post.xml" relativeToChangelogFile="true"/>
+
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/label_changelog" relativeToChangelogFile="true"/>
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/data/insert_changeset_label.xml" relativeToChangelogFile="true"/>
+
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/post_label_changelog" relativeToChangelogFile="true"/>
+    <include file="src/main/resources/liquibase/dbschema/v1_changelog/data/insert_changeset_post_label.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

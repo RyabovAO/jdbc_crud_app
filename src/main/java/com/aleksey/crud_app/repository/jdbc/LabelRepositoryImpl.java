@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LabelRepositoryImpl implements LabelRepository {
-    private final String INSERT = "INSERT INTO label VALUES(?, ?, ?, ?)";
-    private final String UPDATE = "UPDATE label SET name = ?, post_id = ? WHERE id = ?";
+    private final String INSERT = "INSERT INTO label VALUES(?, ?, ?)";
+    private final String UPDATE = "UPDATE label SET name = ? WHERE id = ?";
     private final String SELECT_ALL = "SELECT * FROM label";
     private final String SELECT_BY_ID = "SELECT * FROM label WHERE id = ?";
     private final String DELETE = "UPDATE label SET status = 'DELETED' WHERE id = ?";
@@ -40,7 +40,6 @@ public class LabelRepositoryImpl implements LabelRepository {
                 while (resultSet.next()) {
                     selectLabel.setId(resultSet.getInt("id"));
                     selectLabel.setName(resultSet.getString("name"));
-                    selectLabel.setPost_id(resultSet.getInt("post_id"));
                     selectLabel.setStatus(Status.valueOf(resultSet.getString("status")));
                 }
             } catch (SQLException e) {
@@ -62,7 +61,7 @@ public class LabelRepositoryImpl implements LabelRepository {
                 String name = resultSet.getString("name");
                 int post_id = resultSet.getInt("post_id");
                 String status = resultSet.getString("status");
-                Label lb = new Label(id, name, post_id, Status.valueOf(status));
+                Label lb = new Label(id, name, Status.valueOf(status));
                 labels.add(lb);
             }
         } catch (SQLException e) {
@@ -82,8 +81,7 @@ public class LabelRepositoryImpl implements LabelRepository {
         ) {
             preparedStatement.setInt(1, label.getId());
             preparedStatement.setString(2, label.getName());
-            preparedStatement.setInt(3, label.getPost_id());
-            preparedStatement.setString(4, label.getStatus().toString());
+            preparedStatement.setString(3, label.getStatus().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -97,8 +95,7 @@ public class LabelRepositoryImpl implements LabelRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {
             preparedStatement.setString(1, label.getName());
-            preparedStatement.setInt(2, label.getPost_id());
-            preparedStatement.setInt(3, label.getId());
+            preparedStatement.setInt(2, label.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
